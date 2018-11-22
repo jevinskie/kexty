@@ -1,0 +1,6 @@
+kexty
+makedb
+kext/test_serv
+kext/SimpleDriver
+kext/SimpleDriver.*.ld/
+*.o

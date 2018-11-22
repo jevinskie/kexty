@@ -17,7 +17,7 @@ class XerubDriver : public IOService
 
 public:
 	// IOService methods
-	virtual bool start(IOService *provider);
+	virtual bool start(IOService *provider) override;
 
 	// SimpleDriver methods
 	virtual IOReturn testMe(uint32_t *demo);
