@@ -1,5 +1,9 @@
 kexty
+kexty-ios
+kexty-mac
 makedb
+makedb-ios
+makedb-mac
 kext/test_serv
 kext/SimpleDriver
 kext/SimpleDriver.*.ld/

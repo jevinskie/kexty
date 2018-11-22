@@ -27,7 +27,7 @@
 #define HOST_KERNEL_PORT 4
 #endif
 
-//#define MY_LOGGER	// debugging stuff for 32bit (7.x, maybe 8.x...)
+#define MY_LOGGER	// debugging stuff for 32bit (7.x, maybe 8.x...)
 #define MY_LOGGER_SIZE	(64 * 1024)
 
 typedef unsigned long long addr_t;

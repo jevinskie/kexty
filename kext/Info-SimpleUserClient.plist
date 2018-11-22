@@ -28,10 +28,8 @@
 			<string>com.xerub.driver.SimpleDriver</string>
 			<key>IOClass</key>
 			<string>XerubDriver</string>
-#if DEBUG
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
-#endif
 			<key>IOMatchCategory</key>
 			<string>XerubDriver</string>
 			<key>IOProbeScore</key>

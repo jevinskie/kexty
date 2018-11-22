@@ -22,13 +22,13 @@ protected:
 
 public:
 	// IOUserClient methods
-	virtual bool start(IOService *provider);
+	virtual bool start(IOService *provider) override;
 
-	virtual bool initWithTask(task_t owningTask, void *securityToken, UInt32 type, OSDictionary *properties);
+	virtual bool initWithTask(task_t owningTask, void *securityToken, UInt32 type, OSDictionary *properties) override;
 
 protected:
 	// KPI for supporting access from both 32-bit and 64-bit user processes beginning with Mac OS X 10.5.
-	virtual IOReturn externalMethod(uint32_t selector, IOExternalMethodArguments *arguments, IOExternalMethodDispatch *dispatch, OSObject *target, void *reference);
+	virtual IOReturn externalMethod(uint32_t selector, IOExternalMethodArguments *arguments, IOExternalMethodDispatch *dispatch, OSObject *target, void *reference) override;
 
 	// SimpleUserClient methods
 	static IOReturn sTestMe(XerubDriver *target, void *reference, IOExternalMethodArguments *arguments);

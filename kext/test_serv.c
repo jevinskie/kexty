@@ -9,6 +9,7 @@ main(void)
     kern_return_t ret;
     io_connect_t conn = 0;
     io_service_t dev = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("XerubDriver"));
+    fprintf(stderr, "dev: %p\n", dev);
     if (dev) {
         ret = IOServiceOpen(dev, mach_task_self(), 0, &conn);
         if (ret == kIOReturnSuccess) {
