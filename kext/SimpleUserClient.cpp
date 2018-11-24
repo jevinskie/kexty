@@ -112,7 +112,7 @@ XerubUserClient::sTestMe(XerubDriver *target, void *reference, IOExternalMethodA
 	return target->testMe((uint32_t *)&arguments->scalarOutput[0]);
 }
 
-
+#ifdef DEBUG_REFCOUNT
 void XerubUserClient::taggedRetain(const void* tag) const
 {
 	clock_sec_t nows;
@@ -141,3 +141,4 @@ void XerubUserClient::taggedRelease(const void * tag) const
 		IOLog(
 			"%lld XerubUserClient" CLASS_OBJECT_FORMAT_STRING "::taggedRelease(tag=%p) done\n", now, CLASS_OBJECT_FORMAT(this), tag);
 }
+#endif

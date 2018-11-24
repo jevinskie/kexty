@@ -2305,7 +2305,7 @@ main(int argc, char **argv)
         fprintf(stderr, "[e] cannot read kernel\n");
         return -1;
     }
-    dump_file("_krnl", -1, kernel, kernel_size);
+    // dump_file("_krnl", -1, kernel, kernel_size);
 
     kernel_ver = (char *)boyermoore_horspool_memmem(kernel, kernel_size, (unsigned char *)"Darwin Kernel Version", sizeof("Darwin Kernel Version") - 1);
     kernel_db = kdb_init("kernel.db", kernel_ver);
@@ -2521,6 +2521,10 @@ main(int argc, char **argv)
 
         dump_file("_logr", -1, logger32, sizeof(logger32));
     }
+
+    // rv = kread(kernel_base, kernel, kernel_size);
+    // assert(rv == kernel_size);
+    // dump_file("_krnl", 3, kernel, kernel_size);
 // XXX no 32bit only here
 #endif	/* MY_LOGGER */
 
@@ -2590,7 +2594,7 @@ main(int argc, char **argv)
     // XXX let's see what changed
     rv = kread(kernel_base, kernel, kernel_size);
     assert(rv == kernel_size);
-    dump_file("_krnl", 2, kernel, kernel_size);
+    // dump_file("_krnl", 2, kernel, kernel_size);
 
     printf("done\n");
 

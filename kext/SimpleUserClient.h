@@ -33,7 +33,9 @@ protected:
 	// SimpleUserClient methods
 	static IOReturn sTestMe(XerubDriver *target, void *reference, IOExternalMethodArguments *arguments);
 
+#ifdef DEBUG_REFCOUNT
 	virtual void taggedRetain(const void* tag) const override;
 	virtual void taggedRelease(const void* tag) const override;
+#endif
 
 };

@@ -19,7 +19,7 @@ all: $(TARGETS)
 test_serv: test_serv.c
 	$(CC) $(CFLAGS) -framework IOKit -o $@ $^
 
-SimpleDriver: SimpleDriver.o SimpleDriver_info.o SimpleUserClient.o
+SimpleDriver: SimpleDriver.o SimpleDriver_info.o SimpleUserClient.o mmu_dump.o
 	$(CXX) $(LDFLAGS) -o $@ $^
 
 clean:

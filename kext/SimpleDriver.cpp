@@ -12,6 +12,8 @@
 #include <libkern/OSDebug.h>
 #include "SimpleDriver.h"
 
+extern void do_mmu_dump(void);
+
 #define super IOService
 
 // Even though we are defining the convenience macro super for the superclass, you must use the actual class name
@@ -71,12 +73,16 @@ XerubDriver::testMe(uint32_t *demo)
 {
 	IOLog("%s[%p]::%s()\n", getName(), this, __FUNCTION__);
 
+	printf("do_mmu_dump start\n");
+	do_mmu_dump();
+	printf("do_mmu_dump end\n");
+
 	*demo = 0xdeaf0000;
 
 	return kIOReturnSuccess;
 }
 
-
+#ifdef DEBUG_REFCOUNT
 void XerubDriver::taggedRetain(const void* tag) const
 {
 	clock_sec_t nows;
@@ -105,3 +111,4 @@ void XerubDriver::taggedRelease(const void * tag) const
 		IOLog(
 			"%lld XerubDriver" CLASS_OBJECT_FORMAT_STRING "::taggedRelease(tag=%p) done\n", now, CLASS_OBJECT_FORMAT(this), tag);
 }
+#endif

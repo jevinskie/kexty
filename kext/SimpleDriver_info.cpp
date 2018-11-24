@@ -12,13 +12,6 @@ _start(__attribute__((unused)) kmod_info_t *ki,
 	printf("SimpleDriver: start printf refcnt: %d addr: %p name: '%s' id: %d\n", ki->reference_count, (void*)ki->address, (const char *)ki->name, ki->id);
 	IOLog("SimpleDriver: start IOLog refcnt: %d addr: %p name: '%s' id: %d\n", ki->reference_count, (void*)ki->address, (const char *)ki->name, ki->id);
 #ifdef TARGET_OS_EMBEDDED
-#if 0
-	OSKext *self = OSKext::lookupKextWithLoadTag(ki->id);
-	printf("SimpleDriver: start printf kext %p\n", self);
-	IOLog("SimpleDriver: start IOLog kext %p\n", self);
-	OSSafeReleaseNULL(self); // for kexty's withPrelinkedInfoDict call that xnu's KLDBootstrap::readPrelinkedExtensions() normally releases
-	OSSafeReleaseNULL(self); // for lookupKextWithLoadTag we just did
-#endif
 	OSKextReleaseKextWithLoadTag(ki->id); // for kexty's withPrelinkedInfoDict call that xnu's KLDBootstrap::readPrelinkedExtensions() normally releases
 #endif
 	return KERN_SUCCESS;
