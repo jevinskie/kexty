@@ -9,6 +9,7 @@
 
 
 #include <IOKit/IOLib.h>
+#include <libkern/OSDebug.h>
 #include "SimpleDriver.h"
 
 #define super IOService
@@ -73,4 +74,36 @@ XerubDriver::testMe(uint32_t *demo)
 	*demo = 0xdeaf0000;
 
 	return kIOReturnSuccess;
+}
+
+
+void XerubDriver::taggedRetain(const void* tag) const
+{
+	clock_sec_t nows;
+	clock_usec_t nowus;
+	clock_get_system_microtime(&nows, &nowus);
+	uint64_t now = (uint64_t)nowus + (uint64_t)nows * 1000000;
+	OSReportWithBacktrace(
+		"%lld XerubDriver" CLASS_OBJECT_FORMAT_STRING "::taggedRetain(tag=%p)\n", now, CLASS_OBJECT_FORMAT(this), tag);
+	IOService::taggedRetain(tag);
+	int count = getRetainCount();
+	// int count = 243;
+	IOLog("%lld XerubDriver::taggedRetain(tag=%p) %d final done\n", now, tag, count);
+}
+void XerubDriver::taggedRelease(const void * tag) const
+{
+	clock_sec_t nows;
+	clock_usec_t nowus;
+	clock_get_system_microtime(&nows, &nowus);
+	uint64_t now = (uint64_t)nowus + (uint64_t)nows * 1000000;
+	OSReportWithBacktrace(
+		"%lld XerubDriver" CLASS_OBJECT_FORMAT_STRING "::taggedRelease(tag=%p)\n", now, CLASS_OBJECT_FORMAT(this), tag);
+	int count = getRetainCount();
+	IOService::taggedRelease(tag);
+	if (count == 1)
+		IOLog(
+			"%lld XerubDriver::taggedRelease(tag=%p) count: %d final done\n", now, tag, count);
+	else
+		IOLog(
+			"%lld XerubDriver" CLASS_OBJECT_FORMAT_STRING "::taggedRelease(tag=%p) count: %d done\n", now, CLASS_OBJECT_FORMAT(this), tag, count);
 }

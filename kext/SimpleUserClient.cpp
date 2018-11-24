@@ -11,6 +11,7 @@
 #include <IOKit/IOLib.h>
 #include <IOKit/IOKitKeys.h>
 #include <libkern/OSByteOrder.h>
+#include <libkern/OSDebug.h>
 #include "SimpleUserClient.h"
 
 
@@ -109,4 +110,36 @@ IOReturn
 XerubUserClient::sTestMe(XerubDriver *target, void *reference, IOExternalMethodArguments *arguments)
 {
 	return target->testMe((uint32_t *)&arguments->scalarOutput[0]);
+}
+
+
+void XerubUserClient::taggedRetain(const void* tag) const
+{
+	clock_sec_t nows;
+	clock_usec_t nowus;
+	clock_get_system_microtime(&nows, &nowus);
+	uint64_t now = (uint64_t)nowus + (uint64_t)nows * 1000000;
+	OSReportWithBacktrace(
+		"%lld XerubUserClient" CLASS_OBJECT_FORMAT_STRING "::taggedRetain(tag=%p)\n", now, CLASS_OBJECT_FORMAT(this), tag);
+	IOService::taggedRetain(tag);
+	int count = getRetainCount();
+	// int count = 243;
+	IOLog("%lld XerubUserClient::taggedRetain(tag=%p) count: %d final done\n", now, tag, count);
+}
+void XerubUserClient::taggedRelease(const void * tag) const
+{
+	clock_sec_t nows;
+	clock_usec_t nowus;
+	clock_get_system_microtime(&nows, &nowus);
+	uint64_t now = (uint64_t)nowus + (uint64_t)nows * 1000000;
+	OSReportWithBacktrace(
+		"%lld XerubUserClient" CLASS_OBJECT_FORMAT_STRING "::taggedRelease(tag=%p)\n", now, CLASS_OBJECT_FORMAT(this), tag);
+	int count = getRetainCount();
+	IOService::taggedRelease(tag);
+	if (count == 1)
+		IOLog(
+			"%lld XerubUserClient::taggedRelease(tag=%p) count: %d final done\n", now, tag, count);
+	else
+		IOLog(
+			"%lld XerubUserClient" CLASS_OBJECT_FORMAT_STRING "::taggedRelease(tag=%p) count: %d done\n", now, CLASS_OBJECT_FORMAT(this), tag, count);
 }

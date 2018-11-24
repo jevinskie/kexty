@@ -22,6 +22,25 @@ public:
 	// virtual bool init(OSDictionary *dict) override;
 	virtual void free(void) override;
 
+	virtual void taggedRetain(const void* tag) const override;
+	virtual void taggedRelease(const void* tag) const override;
+
 	// SimpleDriver methods
 	virtual IOReturn testMe(uint32_t *demo);
 };
+
+#if 1
+#define CLASS_OBJECT_FORMAT_STRING "[%s@%p:%dx]"
+#define CLASS_OBJECT_FORMAT(obj) myClassName(obj), obj, myRefCount(obj)
+
+inline int myRefCount(const OSObject* obj)
+{
+    return obj ? obj->getRetainCount() : 0;
+}
+
+inline const char* myClassName(const OSObject* obj)
+{
+    if (!obj) return "(null)";
+    return obj->getMetaClass()->getClassName();
+}
+#endif
