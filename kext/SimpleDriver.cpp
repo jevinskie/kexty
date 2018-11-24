@@ -86,9 +86,7 @@ void XerubDriver::taggedRetain(const void* tag) const
 	OSReportWithBacktrace(
 		"%lld XerubDriver" CLASS_OBJECT_FORMAT_STRING "::taggedRetain(tag=%p)\n", now, CLASS_OBJECT_FORMAT(this), tag);
 	IOService::taggedRetain(tag);
-	int count = getRetainCount();
-	// int count = 243;
-	IOLog("%lld XerubDriver::taggedRetain(tag=%p) %d final done\n", now, tag, count);
+	IOLog("%lld XerubDriver" CLASS_OBJECT_FORMAT_STRING "::taggedRetain(tag=%p)\n", now, CLASS_OBJECT_FORMAT(this), tag);
 }
 void XerubDriver::taggedRelease(const void * tag) const
 {
@@ -102,8 +100,8 @@ void XerubDriver::taggedRelease(const void * tag) const
 	IOService::taggedRelease(tag);
 	if (count == 1)
 		IOLog(
-			"%lld XerubDriver::taggedRelease(tag=%p) count: %d final done\n", now, tag, count);
+			"%lld XerubDriver::taggedRelease(tag=%p) final done\n", now, tag);
 	else
 		IOLog(
-			"%lld XerubDriver" CLASS_OBJECT_FORMAT_STRING "::taggedRelease(tag=%p) count: %d done\n", now, CLASS_OBJECT_FORMAT(this), tag, count);
+			"%lld XerubDriver" CLASS_OBJECT_FORMAT_STRING "::taggedRelease(tag=%p) done\n", now, CLASS_OBJECT_FORMAT(this), tag);
 }

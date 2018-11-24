@@ -122,9 +122,7 @@ void XerubUserClient::taggedRetain(const void* tag) const
 	OSReportWithBacktrace(
 		"%lld XerubUserClient" CLASS_OBJECT_FORMAT_STRING "::taggedRetain(tag=%p)\n", now, CLASS_OBJECT_FORMAT(this), tag);
 	IOService::taggedRetain(tag);
-	int count = getRetainCount();
-	// int count = 243;
-	IOLog("%lld XerubUserClient::taggedRetain(tag=%p) count: %d final done\n", now, tag, count);
+	IOLog("%lld XerubUserClient" CLASS_OBJECT_FORMAT_STRING "::taggedRetain(tag=%p)\n", now, CLASS_OBJECT_FORMAT(this), tag);
 }
 void XerubUserClient::taggedRelease(const void * tag) const
 {
@@ -138,8 +136,8 @@ void XerubUserClient::taggedRelease(const void * tag) const
 	IOService::taggedRelease(tag);
 	if (count == 1)
 		IOLog(
-			"%lld XerubUserClient::taggedRelease(tag=%p) count: %d final done\n", now, tag, count);
+			"%lld XerubUserClient::taggedRelease(tag=%p) final done\n", now, tag);
 	else
 		IOLog(
-			"%lld XerubUserClient" CLASS_OBJECT_FORMAT_STRING "::taggedRelease(tag=%p) count: %d done\n", now, CLASS_OBJECT_FORMAT(this), tag, count);
+			"%lld XerubUserClient" CLASS_OBJECT_FORMAT_STRING "::taggedRelease(tag=%p) done\n", now, CLASS_OBJECT_FORMAT(this), tag);
 }
