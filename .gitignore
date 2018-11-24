@@ -1,10 +1,13 @@
 kexty
-kexty-ios
-kexty-mac
 makedb
-makedb-ios
-makedb-mac
+kdb
+*.armv7
+*.i386
 kext/test_serv
 kext/SimpleDriver
 kext/SimpleDriver.*.ld/
+kext/SimpleDriver-mac
+kext/test_serv-mac
+kext/com.xerub.driver.SimpleDriver.kext/
 *.o
+_*
