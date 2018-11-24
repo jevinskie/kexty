@@ -1,19 +1,22 @@
 #include <libkern/libkern.h>
 #include <mach/mach_types.h>
+#include <IOKit/IOLib.h>
 
 extern "C" { 
 
 kern_return_t
 _start(__attribute__((unused)) kmod_info_t *ki,
               __attribute__((unused)) void *d) {
-	printf("SimpleDriver: start\n");
+	printf("SimpleDriver: start printf\n");
+	IOLog("SimpleDriver: start IOLog\n");
 	return KERN_SUCCESS;
 }
 
 kern_return_t
 _stop(__attribute__((unused)) kmod_info_t *ki,
              __attribute__((unused)) void *d) {
-	printf("SimpleDriver: stop\n");
+	printf("SimpleDriver: stop printf\n");
+	IOLog("SimpleDriver: stop IOLog\n");
 	return KERN_SUCCESS;
 }
 

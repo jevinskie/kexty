@@ -135,20 +135,22 @@ kdb_term(struct kdb *k)
     }
 }
 
-#if 0
+#ifdef TOOL_MODE
+#include <assert.h>
 int
-main(void)
+main(int argc, const char **argv)
 {
     struct kdb *k;
     unsigned long long x;
 
-    k = kdb_init("kernel.db", "Darwin Kernel Version 14.0.0: Fri Sep 27 23:00:47 PDT 2013; root:xnu-2423.3.12~1/RELEASE_ARM_S5L8950X");
+    assert(argc > 3);
 
-    x = kdb_find(k, "_kOSBooleanTrue");
-    printf("0x%llx\n", x);
+    k = kdb_init(argv[1], argv[2]);
 
-    x = kdb_find(k, "_kOSBooleanFalse");
-    printf("0x%llx\n", x);
+    for (int i = 3; i < argc; ++i) {
+        x = kdb_find(k, argv[i]);
+        printf("%s -> 0x%llx\n", argv[i], x);
+    }
 
     kdb_term(k);
     return 0;

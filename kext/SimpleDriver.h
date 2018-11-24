@@ -18,6 +18,9 @@ class XerubDriver : public IOService
 public:
 	// IOService methods
 	virtual bool start(IOService *provider) override;
+	virtual void stop(IOService *provider) override;
+	// virtual bool init(OSDictionary *dict) override;
+	virtual void free(void) override;
 
 	// SimpleDriver methods
 	virtual IOReturn testMe(uint32_t *demo);

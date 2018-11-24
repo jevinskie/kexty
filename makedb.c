@@ -426,6 +426,7 @@ main(int argc, char **argv)
         return -1;
     }
     version = (char *)boyermoore_horspool_memmem(kernel, kernel_size, (uint8_t *)"Darwin Kernel Version", sizeof("Darwin Kernel Version") - 1);
+    fprintf(stderr, "Kernel version: '%s'\n", version);
     if (!version) {
         fprintf(stderr, "[e] cannot find version\n");
         term_kernel();

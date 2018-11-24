@@ -35,6 +35,36 @@ XerubDriver::start(IOService *provider)
 	return success;
 }
 
+void
+XerubDriver::stop(IOService *provider)
+{
+	IOLog("%s[%p]::%s(%p)\n", getName(), this, __FUNCTION__, provider);
+
+	super::stop(provider);
+}
+
+#if 0
+bool
+XerubDriver::init(OSDictionary *dict)
+{
+	bool success;
+
+	IOLog("%s[%p]::%s(%p)\n", getName(), this, __FUNCTION__, dict);
+
+	success = super::init(dict);
+
+	return success;
+}
+#endif
+
+void
+XerubDriver::free(void)
+{
+	IOLog("%s[%p]::%s\n", getName(), this, __FUNCTION__);
+
+	super::free();
+}
+
 IOReturn
 XerubDriver::testMe(uint32_t *demo)
 {
